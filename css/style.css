@@ -116,6 +116,7 @@ button:hover {
 }
 
 .card {
+  display: grid;
   background: #222;
   border: 1px solid #506c84;
   border-radius: 6px;
