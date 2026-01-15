@@ -157,6 +157,8 @@ $('#ref-seed').on('click', function(){
   seed = generateRandomSeed();
   $('#seedDisplay').text(seed);
   rng = new Math.seedrandom(seed);
+  win = 0;
+  loss = 0;
   setupGame();
   history.replaceState({}, document.title, location.pathname);
 });
