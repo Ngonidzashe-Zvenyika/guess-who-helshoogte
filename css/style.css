@@ -125,6 +125,7 @@ button:hover {
   aspect-ratio: 1/1;
   object-fit: cover;
   transition: 0.3s;
+  object-position: top;
 }
 
 /* Flipped = greyed out + smaller image */
