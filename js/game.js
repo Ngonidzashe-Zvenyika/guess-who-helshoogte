@@ -154,7 +154,11 @@ $('#noButton').on('click', function(){
 });
 
 $('#ref-seed').on('click', function(){
-  location.href = window.location.pathname;
+  seed = generateRandomSeed();
+  $('#seedDisplay').text(seed);
+  rng = new Math.seedrandom(seed);
+  setupGame();
+  history.replaceState({}, document.title, location.pathname);
 });
 
 $('#roomCodeForm').on('submit', function(e){
