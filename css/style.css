@@ -99,7 +99,6 @@ button:hover {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  grid-template-rows: 200px;
   gap: 10px;
 }
 
