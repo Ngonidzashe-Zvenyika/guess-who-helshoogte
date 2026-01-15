@@ -1,3 +1,6 @@
+// --------------------
+// Seed handling
+// --------------------
 function getSeedFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('seed');
@@ -8,155 +11,102 @@ function generateRandomSeed() {
 }
 
 let seed = getSeedFromURL() || generateRandomSeed();
-
 $('#seedDisplay').text(seed);
 
 let rng = new Math.seedrandom(seed);
 
-var allPics = [];
+// --------------------
+// Images
+// --------------------
+const allPics = [
+  "img/alice.jpg","img/bob.jpg","img/charlie.jpg","img/david.jpg",
+  "img/emma.jpg","img/fatima.jpg","img/george.jpg","img/hannah.jpg",
+  "img/isaac.jpg","img/jade.jpg","img/kyle.jpg","img/leila.jpg",
+  "img/michael.jpg","img/nina.jpg","img/oscar.jpg","img/paula.jpg",
+  "img/quinn.jpg","img/ryan.jpg","img/sophia.jpg","img/tariq.jpg"
+];
 
-$.ajax({
-  url: './img/',
-  success: function (data) {
-    $(data).find('a').attr('href', function (i, val) {
-      if (val.match(/\.(jpe?g|png|gif)$/)) {
-        allPics.push('/img/'+ val);
-      }
-    });
-    setupGame();
-  }
-});
+let selectedPics = [];
+let opponentCharacter = null;
+let win = 0;
+let loss = 0;
 
-var selectedPics = [];
-var opponentCharacterIndex = Math.floor(rng() * selectedPics.length);
-var opponentCharacter = selectedPics[opponentCharacterIndex];
-
-function myCharacter() {
-  const playerSeed = generateRandomSeed();
-  const playerRng = new Math.seedrandom(playerSeed);
-
-  var remainingPics = selectedPics.slice();
-
-  var opponentCharacterIndex = remainingPics.indexOf(opponentCharacter);
-  if (opponentCharacterIndex !== -1) {
-    remainingPics.splice(opponentCharacterIndex, 1);
-  }
-
-  var myPicIndex = Math.floor(playerRng() * remainingPics.length);
-  var myPic = remainingPics[myPicIndex];
-
-  $("#me").html('<img src="' + myPic + '">');
-
-  var name = myPic.split('.jpg')[0];
-  name = name.split('/').pop().split('%20').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
-  $("#name").html('You are ' + name);
+// --------------------
+function prettifyName(path) {
+  let name = path.split('/').pop().replace('.jpg','');
+  return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
+// --------------------
 function displayRandomPhotos() {
-  $('#gameboard').html('');
-  var allPicsCopy = allPics.slice();
+  $('#gameboard').empty();
 
-  for (var i = allPicsCopy.length - 1; i > 0; i--) {
-    var j = Math.floor(rng() * (i + 1));
-    var temp = allPicsCopy[i];
-    allPicsCopy[i] = allPicsCopy[j];
-    allPicsCopy[j] = temp;
+  let shuffled = allPics.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    let j = Math.floor(rng() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
 
-  selectedPics = allPicsCopy.slice(0, 15);
+  selectedPics = shuffled.slice(0, 15);
+  opponentCharacter = selectedPics[Math.floor(rng() * selectedPics.length)];
 
-  for (var i = 0; i < selectedPics.length; i++) {
-    var cardContainer = $('<div class="card-container">');
-    cardContainer.append('<div class="card"><img src="' + selectedPics[i] + '"></div>');
-
-    var name = selectedPics[i].split('.jpg')[0];
-    name = name.split('/').pop().split('%20').map(function (part) {
-      return part.charAt(0).toUpperCase() + part.slice(1);
-    }).join(' ');
-
-    cardContainer.append('<div class="card-name">' + name + '</div>');
-
-    $("#gameboard").append(cardContainer);
-  }
+  selectedPics.forEach(pic => {
+    $('#gameboard').append(`
+      <div class="card-container">
+        <div class="card"><img src="${pic}"></div>
+        <div class="card-name">${prettifyName(pic)}</div>
+      </div>
+    `);
+  });
 }
 
+// --------------------
+function myCharacter() {
+  let remaining = selectedPics.filter(p => p !== opponentCharacter);
+  let myPic = remaining[Math.floor(Math.random() * remaining.length)];
+
+  $("#me").html(`<img src="${myPic}">`);
+  $("#name").text("You are " + prettifyName(myPic));
+}
+
+// --------------------
 function setupGame() {
-  console.log("Setup game called");
   displayRandomPhotos();
   myCharacter();
-
-  $("#gameboard").on('click', '.card', function () {
-    $(this).toggleClass("flipped");
-  });
-
-  var win = 0;
-  var loss = 0;
-
-  $('#score').html(win + ' - ' + loss);
-
-  function updateScore(win, loss) {
-    $('#score').html(win + ' - ' + loss);
-  }
-
-  $('#win').click(function () {
-    win += 1;
-    updateScore(win, loss);
-    reset();
-  });
-
-  $('#loss').click(function () {
-    loss += 1;
-    updateScore(win, loss);
-    reset();
-  });
-
-
+  $('#score').text(`${win} - ${loss}`);
 }
 
-function reset() {
-  // Show the custom popup
-  $('#customPopup').css('display', 'flex');
+// --------------------
+// Events
+// --------------------
+$("#gameboard").on('click', '.card', function(){
+  $(this).toggleClass("flipped");
+});
 
-  $('#yesButton').click(function () {
-    $('#customPopup').css('display', 'none');
-    $('#gameboard').html('');
-    selectedPics = [];
-    displayRandomPhotos();
-    myCharacter();
-  });
+$('#win').on('click', function(){
+  win++;
+  $('#customPopup').css('display','flex');
+});
 
-  $('#noButton').click(function () {
-    $('#customPopup').css('display', 'none');
-    alert('Thanks for playing!');
-  });
+$('#loss').on('click', function(){
+  loss++;
+  $('#customPopup').css('display','flex');
+});
 
-  $('#cancelButton').click(function () {
-    $('#customPopup').css('display', 'none');
-  });
-}
-
-$(window).on('load', function () {
-  setTimeout(function () {
-    $('.loader').fadeOut();
-    if (typeof setupGameCalled === 'undefined') {
-      setupGameCalled = true;
-      setupGame();
-    }
-  }, 4000);
-
+$('#yesButton').on('click', function(){
+  $('#customPopup').hide();
   setupGame();
 });
 
-$(document).on('submit', '#roomCodeForm', function (event) {
-  event.preventDefault();
-
-  const enteredSeed = $('#roomCodeInput').val();
-
-  if (enteredSeed && !isNaN(enteredSeed)) {
-    seed = enteredSeed;
-    $('#seedDisplay').text(seed);
-    rng = new Math.seedrandom(seed);
-
-    location.href = `?seed=${seed}`;
-  }
+$('#noButton').on('click', function(){
+  $('#customPopup').hide();
 });
+
+$('#roomCodeForm').on('submit', function(e){
+  e.preventDefault();
+  const entered = $('#roomCodeInput').val();
+  if (entered) location.href = '?seed=' + entered;
+});
+
+// --------------------
+$(window).on('load', setupGame);
