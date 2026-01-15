@@ -1,81 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Helshoogte Guess Who</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
 </head>
 <body>
 
-  <header class="loader">
-      <ul class="pre-loader">
-        <li>H</li>
-        <li>E</li>
-        <li>L</li>
-        <li>S</li>
-        <li>H</li>
-        <li>O</li>
-        <li>O</li>
-        <li>G</li>
-        <li>T</li>
-        <li>E</li>
-      </ul>
-  </header>
+<header class="topbar">
+  <h1>Guess Who – Helshoogte Edition</h1>
+</header>
 
-  <div id="header">
-    <h1>Guess Who - Helshoogte Edition</h1>
-  </div>
+<main class="layout">
 
-  <main class="main-content">
-    <div class="sidebar">
-      <div class="container">
-        <div id="me"></div>
-        <h3 id="name"></h3>
-        <div class="tracker">
-          <div id="score"></div>
-          <p>Did you win?</p>
-          <div class="buttons">
-            <button id="win" type="button">Yes</button>
-            <button id="loss" type="button">No</button>
-          </div>
-        </div>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div id="me"></div>
+    <h2 id="name"></h2>
+
+    <div class="tracker">
+      <div id="score">0 - 0</div>
+      <p>Did you win?</p>
+      <div class="buttons">
+        <button id="win">Yes</button>
+        <button id="loss">No</button>
       </div>
     </div>
-  
-    <div id="gameboard"></div>
-  </main>
 
-  <div id="customPopup" class="popup">
-    <div class="popup-content">
-      <p>Do you want to play again?</p>
-      <button id="yesButton">Yes</button>
-      <button id="noButton">No</button>
-      <button id="cancelButton">Cancel</button>
-    </div>
-  </div>
-  
+    <div class="room">
+      <h4>Room Code</h4>
+      <p id="seedDisplay"></p>
 
-  <footer>
-      <div id="roomCode">
-        <h4>Room Code:</h4>
-        <p id="seedDisplay"></p>
-    </div>
-
-    <div id="enterRoom">
-      <h4>Enter Room Code:</h4>
       <form id="roomCodeForm">
-          <input type="text" id="roomCodeInput" placeholder="Enter room code">
-
-          <button type="submit" id="refreshRoom">Refresh</button>
+        <input type="text" id="roomCodeInput" placeholder="Enter room code">
+        <button type="submit">Join</button>
       </form>
     </div>
+  </aside>
 
-    <div id = "signature">
-      <p>Developed By Joshua Wallace</p>
-    </div>
-  </footer>
+  <!-- Gameboard -->
+  <section id="gameboard"></section>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="js/game.js"></script>
+</main>
+
+<!-- Popup -->
+<div id="customPopup" class="popup">
+  <div class="popup-content">
+    <p>Play again?</p>
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+  </div>
+</div>
+
+<footer>
+  Developed by Joshua Wallace
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/game.js"></script>
 </body>
 </html>
