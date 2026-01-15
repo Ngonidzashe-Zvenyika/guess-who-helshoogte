@@ -1,302 +1,177 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.loader {
-  background-color: black;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pre-loader {
-  display: flex;
-}
-
-.pre-loader li {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #484848;
-  letter-spacing: 10px;
-  font-size: 100px;
-  list-style: none;
-  animation: pre-load 4s ease-in-out infinite;
-}
-
-@keyframes pre-load {
-
-  0% {
-    color: #484848;
-    text-shadow: none;
-  }
-
-  20% {
-    color: #484848;
-    text-shadow: none;
-  }
-
-  40% {
-    color: #506c84;
-    text-shadow: 0 0 7px #506c84, 0 0 50px #506c84;
-  }
-
-  60% {
-    color: #484848;
-    text-shadow: none;
-  }
-
-  80% {
-    color: #484848;
-    text-shadow: none;
-  }
-
-  100% {
-    color: #484848;
-    text-shadow: none;
-  }
-
-}
-
-ul li:nth-child(1) {
-  animation-delay: 0s;
-}
-
-ul.pre-loader li:nth-child(2) {
-  animation-delay: .2s;
-}
-
-ul.pre-loader li:nth-child(3) {
-  animation-delay: .4s;
-}
-
-ul.pre-loader li:nth-child(4) {
-  animation-delay: .6s;
-}
-
-ul.pre-loader li:nth-child(5) {
-  animation-delay: .8s;
-}
-
-ul.pre-loader li:nth-child(6) {
-  animation-delay: 1s;
-}
-
-ul.pre-loader li:nth-child(7) {
-  animation-delay: 1.2s;
-}
-
-ul.pre-loader li:nth-child(8) {
-  animation-delay: 1.4s;
-}
-
-ul.pre-loader li:nth-child(9) {
-  animation-delay: 1.6s;
-}
-
-ul.pre-loader li:nth-child(10) {
-  animation-delay: 1.8s;
-}
-
-
 body {
-background-color: rgb(26, 26, 26);
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #e6e6e6;
+}
+
+.topbar {
+  text-align: center;
+  padding: 15px;
+  background: #1c1c1c;
+  border-bottom: 2px solid #506c84;
+}
+
+.topbar h1 {
   color: #506c84;
 }
 
-#header{
-  text-align: center;
-  padding-top: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-img {
-  object-fit: cover;
-  display: block;
-}
-
-.main-content {
+.layout {
   display: flex;
+  max-width: 1200px;
   margin: auto;
-  padding-top: 20px;
+  padding: 15px;
+  gap: 15px;
 }
 
+/* Sidebar */
 .sidebar {
   width: 260px;
-  padding-right: 10px;
-}
-
-.container {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 8px;
   position: sticky;
-  top: 0;
+  top: 10px;
+  height: fit-content;
 }
 
 #me img {
-  border: 5px solid #506c84;
-  width: 250px;
-  height: 250px;
-  object-fit: contain;
-}
-
-#name,
-.tracker {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #506c84;
-  text-shadow: 0.5px 0.5px 5px #506271;
+  width: 100%;
+  border-radius: 6px;
+  border: 3px solid #506c84;
 }
 
 #name {
-  font-size: 36px;
-  padding-top: 10px;
+  text-align: center;
+  margin-top: 10px;
+  color: #506c84;
 }
 
 .tracker {
-  font-size: 25px;
-  padding-top: 40px;
-  margin-left: 10px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 #score {
-  padding-bottom: 80px;
-  font-size: 36px;
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
 button {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 10px;
-  font-size: 25px;
-  border-radius: 10px;
+  background: #506c84;
   color: white;
-  background-color: #506c84;
-  margin-top: 10px;
-  letter-spacing: 5px;
-  transition: .5s;
   border: none;
-  box-shadow: 0.5px 0.5px 5px #506c84;
-}
-
-button:focus {
-  outline: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
-  transform: scale(1.15);
+  background: #6d8aa3;
 }
 
+.room {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.room input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+}
+
+/* Gameboard */
 #gameboard {
-  display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  column-gap: 5px;
-  row-gap: 5px;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+/* Card */
+.card-container {
+  text-align: center;
 }
 
 .card {
-  background-size: cover;
-  width: 200px;
-  height: 200px;
+  background: #222;
   border: 1px solid #506c84;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
 
 .card img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: 0.3s;
 }
 
+/* Flipped = greyed out + smaller image */
 .card.flipped img {
-  height: 35%;
-  width: 35%;
-}
-
-@media (min-width: 1300px) {
-  .main-content {
-    max-width: 1300px;
-    margin: auto;
-  }
-}
-
-#roomCode {
-  margin-top: 20px;
-  text-align: center;
-  color: #506c84;
-}
-
-#roomCode h4 {
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
-#seedDisplay {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-#enterRoom {
-  margin-top: 20px;
-  text-align: center;
-}
-
-#enterRoom h4 {
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
-#roomCodeInput {
-  padding: 5px;
-  margin-right: 5px;
-}
-
-#refreshRoom {
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-footer{
-  padding-bottom: 20px;
-}
-
-.card-container {
-  text-align: center;
-  margin-bottom: 20px;
+  filter: grayscale(100%) brightness(40%);
+  transform: scale(0.6);
 }
 
 .card-name {
-  font-size: 14px;
-  color: #506c84;
-  margin-top: 5px;
-  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #aaa;
 }
 
-#signature{
-  float: right;
-  margin-right: 5px;
-  color: white;
-  font-size: smaller;
-}
-
+/* Popup */
 .popup {
   display: none;
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
 }
 
 .popup-content {
-  background-color: white;
+  background: #1c1c1c;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   text-align: center;
 }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: relative;
+  }
+}
+
 
 .popup-content button {
   margin: 5px;
