@@ -82,6 +82,8 @@ button:hover {
 }
 
 .room {
+  display: grid;
+  gap: 15px;
   margin-top: 20px;
   text-align: center;
 }
