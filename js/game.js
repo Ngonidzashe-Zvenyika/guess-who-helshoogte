@@ -153,6 +153,13 @@ $('#noButton').on('click', function(){
   $('#customPopup').hide();
 });
 
+$('#ref-seed').on('click', function(){
+  seed = generateRandomSeed();
+  rng = new Math.seedrandom(seed);
+  displayRandomPhotos();
+  myCharacter();
+});
+
 $('#roomCodeForm').on('submit', function(e){
   e.preventDefault();
   const entered = $('#roomCodeInput').val();
