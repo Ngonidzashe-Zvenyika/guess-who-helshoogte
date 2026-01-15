@@ -26,8 +26,8 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 15px;
-  row-gap: 20px;
-  column-gap: 30px;
+  row-gap: 30px;
+  column-gap: 20px;
   align-items: start;
 }
 
