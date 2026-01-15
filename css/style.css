@@ -103,6 +103,10 @@ button:hover {
   gap: 20px;
 }
 
+#roomCodeInput {
+  text-align: center;
+}
+
 /* Gameboard */
 #gameboard {
   flex: 1;
