@@ -103,8 +103,10 @@ function displayRandomPhotos() {
 
   selectedPics.forEach(pic => {
     $('#gameboard').append(`
-        <img src="${pic}">
+        <div class="card-container">
+        <div class="card"><img src="${pic}"></div>
         <div class="card-name">${prettifyName(pic)}</div>
+        </div>
     `);
   });
 }
