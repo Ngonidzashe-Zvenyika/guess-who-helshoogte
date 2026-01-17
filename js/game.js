@@ -37,7 +37,7 @@ const allPics = [
   "img/Christopher du Toit.jpg",
   "img/Cruz Swiegelaar.jpg",
   "img/Curtis A Vries.jpg",
-  "img/Daniël de Wet.jpg",
+  "img/Daniel de Wet.jpg",
   "img/De la Rey Radley.jpg",
   "img/Dhruv Patel.jpg",
   "img/Franco Jordaan.jpg",
