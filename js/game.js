@@ -54,7 +54,7 @@ const allPics = [
   "img/Kian Goliath.jpg",
   "img/Lentsoe Mosupye.jpg",
   "img/Leo Kala.jpg",
-  "img/Liam Duvenage (Right).jpg",
+  "img/Liam Duvenage.jpg",
   "img/Louw de Bruyn.jpg",
   "img/Luc du Toit.jpg",
   "img/Malan Nortier.jpg",
